@@ -8,7 +8,13 @@
 
 use CherryneChou\LaravelUpload\Http\Controllers;
 
-Route::get('api/utils/getResources', Controllers\UtilsController::class.'@getResources')->name('api.utils.getResources');
-Route::get('api/utils/getCategories', Controllers\UtilsController::class.'@getCategories')->name('api.utils.getCategories');
-Route::post('api/resource/postUpload', Controllers\UploadController::class.'@postUpload')->name('api.resource.postUpload');
-Route::post('api/resource/destroy',Controllers\UploadController::class.'@destroy')->name('api.resource.destroy');
+Route::group([
+    'prefix'        => config('admin.route.prefix')
+], function (Router $router) {
+
+    Route::get('api/utils/getResources', Controllers\UtilsController::class.'@getResources')->name('api.utils.getResources');
+    Route::get('api/utils/getCategories', Controllers\UtilsController::class.'@getCategories')->name('api.utils.getCategories');
+    Route::post('api/resource/postUpload', Controllers\UploadController::class.'@postUpload')->name('api.resource.postUpload');
+    Route::post('api/resource/destroy',Controllers\UploadController::class.'@destroy')->name('api.resource.destroy');
+
+});

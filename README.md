@@ -15,6 +15,12 @@ TODO
 
 ## Contributing
 
+php artisan vendor:publish --provider="CherryneChou\LaravelUpload\UploadServiceProvider"
+
+
+php artisan migrate
+
+
 You can contribute in one of three ways:
 
 1. File bug reports using the [issue tracker](https://github.com/cherrynechou/laravel-upload/issues).

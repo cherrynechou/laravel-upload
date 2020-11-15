@@ -6,7 +6,7 @@
  * Time: 14:35
  */
 
-namespace CherryneChou\LaravelUpload\Models\Listeners;
+namespace CherryneChou\LaravelUpload\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
