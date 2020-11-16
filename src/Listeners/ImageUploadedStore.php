@@ -11,7 +11,7 @@ namespace CherryneChou\LaravelUpload\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use CherryneChou\LaravelUpload\Models\Attachment;
-use CherryneChou\LaravelUpload\Models\Events\Uploaded;
+use CherryneChou\LaravelUpload\Events\Uploaded;
 
 /**
  * Class ImageUploadedStore
@@ -44,7 +44,7 @@ class ImageUploadedStore
 
             foreach ($imgData as $key=>$item){
                 Attachment::create([
-                    'filename'     => $item['name'],                    //文件名称
+                    'file_name'     => $item['name'],                    //文件名称
                     'url'          => $item['path'],                    //本地路径
                     'md5'          => $item['md5'],
                     'file_ext'     => $item['file_ext'],

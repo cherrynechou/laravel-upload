@@ -8,7 +8,7 @@
     @endif
     @foreach($lists as $resource)
         <div class="item checkMedia content-box" style="background-image: url('{{ $resource->remote_url }}')" data-json="{{ $resource }}">
-            <div class="name">{{ $resource->filename }}</div>
+            <div class="name">{{ $resource->file_name }}</div>
             <div class="mask">
                 <div class="wi wi-right"></div>
             </div>
