@@ -22,7 +22,7 @@ class AttachmentCategory extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id','uid','name','label','description','sort'
+        'parent_id','user_id','name','label','description','sort'
     ];
 
     public function __construct(array $attributes = [])
