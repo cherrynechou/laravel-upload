@@ -65,7 +65,7 @@ class UploadController extends BaseController
 
 
         //文件目录模块
-        $this->uploadDirectory = request('folder') ? request('folder') : 'images';
+        $this->uploadDirectory = $directory;
 
         //生成保存数据
         $data = [];
