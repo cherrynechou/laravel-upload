@@ -51,7 +51,7 @@ class UploadController extends BaseController
 
         $where = ['name'=>$category, 'user_id'=>$user_id];
 
-        $categoryData  =  $where + ['label' => $category];
+        $categoryData  =  $where + ['label' => $category, 'description'=>''];
         //分类
         $now_category = AttachmentCategory::firstOrCreate($where, $categoryData);
 
@@ -100,6 +100,7 @@ class UploadController extends BaseController
             //把扩展名去掉
             $data[$key]['name'] = $fileName;
             $data[$key]['path'] = $file_path;
+            $data[$key]['user_id'] = $user_id;
             $data[$key]['file_ext'] = $extension;
             $data[$key]['md5'] = md5($file_path);
             $data[$key]['url'] = $this->objectUrl($file_path);
