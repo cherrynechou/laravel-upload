@@ -47,7 +47,9 @@ class UploadController extends BaseController
     {
         $category = request('category') ?? 'image';
 
-        $where = ['name'=>$category];
+        $user_id = request('user_id') ?? 0;
+
+        $where = ['name'=>$category, 'user_id'=>$user_id];
 
         $categoryData  =  $where + ['label' => $category];
         //分类

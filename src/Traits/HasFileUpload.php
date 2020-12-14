@@ -77,8 +77,12 @@ trait HasFileUpload
         }
 
         if ($this->storage) {
-            return $this->storage->url($path);
+            if($this->storage->exists($path)){
+              return $this->storage->url($path);
+            }
         }
+
+        return '';
     }
 
     /**
