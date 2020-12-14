@@ -57,7 +57,14 @@ class UtilsController extends BaseController
     public function getCategories()
     {
         try {
-            $categories = AttachmentCategory::all();
+
+            $user_id = request('user_id') ?? 0;
+
+
+            $categories = AttachmentCategory::query()->where(function($query) use ($user_id){
+                return $query->where('user_id',$user_id);
+            })->all();
+            
             return $this->ajaxJson(true,$categories,'200');
         }catch (\Exception $ex){
             return $this->ajaxJson(true,[],400,$ex->getMessage());
