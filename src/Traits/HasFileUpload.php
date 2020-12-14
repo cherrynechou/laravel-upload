@@ -126,7 +126,7 @@ trait HasFileUpload
         $directory =  config('upload.image.dir','/uploads/{model}/{Y}/{m}/{d}/');;
 
         $replacements = [
-            '{model}'   => $this->uploadFolder,
+            '{model}'   => $this->uploadDirectory,
             '{Y}'       => date('Y'),
             '{m}'       => date('m'),
             '{d}'       => date('d'),

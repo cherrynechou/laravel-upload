@@ -28,7 +28,7 @@ class UploadController extends BaseController
      * @var string
      * 模块名字
      */
-    protected $uploadFolder='';
+    protected $uploadDirectory='';
 
     /**
      * UploadController constructor.
@@ -57,8 +57,15 @@ class UploadController extends BaseController
 
         $files = $request->file('upload_image');
 
+        $directory = request('directory') ? request('directory') : 'images' ;
+
+        if(!empty($user_id)){
+            $directory=$directory .'/' . $user_id;
+        }
+
+
         //文件目录模块
-        $this->uploadFolder = request('folder') ? request('folder') : 'images';
+        $this->uploadDirectory = request('folder') ? request('folder') : 'images';
 
         //生成保存数据
         $data = [];
@@ -82,10 +89,10 @@ class UploadController extends BaseController
 
             $fileName = generate_random_string() . '.' . $extension;
 
-            $directory = $this->formatDir();
+            $target_directory = $this->formatDir();
 
             //文件全路径名
-            $file_path = $directory . $fileName;
+            $file_path = $target_directory . $fileName;
 
             //判断文件是否存在
             $this->storage->putFileAs($directory, new File($realPath), $fileName);
