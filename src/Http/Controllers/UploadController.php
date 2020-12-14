@@ -45,11 +45,13 @@ class UploadController extends BaseController
      */
     public function postUpload(Request $request)
     {
-        $category = request('category') ?? 'image';
+        $directory = request('directory') ? request('directory') : 'images' ;
+
+        $module = request('module') ? request('module') ? '';
 
         $user_id = request('user_id') ?? 0;
 
-        $where = ['name'=>$category, 'user_id'=>$user_id];
+        $where = ['name'=>$directory, 'user_id'=>$user_id];
 
         $categoryData  =  $where + ['label' => $category, 'description'=>''];
         //分类
@@ -57,10 +59,13 @@ class UploadController extends BaseController
 
         $files = $request->file('upload_image');
 
-        $directory = request('directory') ? request('directory') : 'images' ;
-
+        //设定目录
         if(!empty($user_id)){
-            $directory=$directory .'/' . $user_id;
+            $directory = $directory .'/' . $user_id;
+        }
+
+        if(!empty($module)){
+            $directory = $directory .'/' . $module;
         }
 
 
