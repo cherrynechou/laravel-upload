@@ -20,14 +20,14 @@ return [
     */
     //上传图片配置
     'image'=>[
-        'dir'   => '/uploads/{model}/{Y}/{m}/{d}/',
+        'dir'   => '/{directory}/{Y}/{m}/{d}/',
         'size'  => 2,    //文件大小  单位M
         'num'   => 5,     //文件个数
         'mimes' => ['jpg','jpeg', 'png', 'bmp', 'gif', 'mp4'],
     ],
     //上传视频配置
     'video'=>[
-        'dir'   => '/uploads/{model}/{Y}/{m}/{d}/',
+        'dir'   => '/{directory}/{Y}/{m}/{d}/',
         'size'  => 2,    //文件大小  单位M
         'num'   => 5,     //文件个数
         'mimes' => ['mp4'],

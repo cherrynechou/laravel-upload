@@ -45,13 +45,13 @@ class UploadController extends BaseController
      */
     public function postUpload(Request $request)
     {
-        $directory = request('directory') ? request('directory') : 'images' ;
+        $category = request('category') ? request('category') : 'images' ;
 
         $module = request('module') ? request('module') ? '';
 
         $user_id = request('user_id') ?? 0;
 
-        $where = ['name'=>$directory, 'user_id'=>$user_id];
+        $where = ['name'=>$category, 'user_id'=>$user_id];
 
         $categoryData  =  $where + ['label' => $category, 'description'=>''];
         //分类
@@ -61,16 +61,16 @@ class UploadController extends BaseController
 
         //设定目录
         if(!empty($user_id)){
-            $directory = $directory .'/' . $user_id;
+            $category = $category .'/' . $user_id;
         }
 
         if(!empty($module)){
-            $directory = $directory .'/' . $module;
+            $category = $category .'/' . $module;
         }
 
 
         //文件目录模块
-        $this->uploadDirectory = $directory;
+        $this->uploadDirectory = $category;
 
         //生成保存数据
         $data = [];
@@ -100,7 +100,7 @@ class UploadController extends BaseController
             $file_path = $target_directory . $fileName;
 
             //判断文件是否存在
-            $this->storage->putFileAs($directory, new File($realPath), $fileName);
+            $this->storage->putFileAs($target_directory, new File($realPath), $fileName);
 
             //把扩展名去掉
             $data[$key]['name'] = $fileName;
