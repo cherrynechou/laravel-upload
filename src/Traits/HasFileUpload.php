@@ -123,15 +123,15 @@ trait HasFileUpload
     protected function formatDir()
     {
 
-        $directory =  config('upload.image.dir','/uploads/{model}/{Y}/{m}/{d}/');;
+        $directory =  config('upload.image.dir','/{directory}/{Y}/{m}/{d}/');;
 
         $replacements = [
-            '{model}'   => $this->uploadDirectory,
-            '{Y}'       => date('Y'),
-            '{m}'       => date('m'),
-            '{d}'       => date('d'),
-            '{H}'       => date('H'),
-            '{i}'       => date('i'),
+            '{directory}'   => $this->uploadDirectory,
+            '{Y}'           => date('Y'),
+            '{m}'           => date('m'),
+            '{d}'           => date('d'),
+            '{H}'           => date('H'),
+            '{i}'           => date('i'),
         ];
 
         return str_replace(array_keys($replacements), $replacements, $directory);

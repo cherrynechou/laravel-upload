@@ -29,7 +29,7 @@ class UtilsController extends BaseController
 
         $user_id = request('user_id') ?? 0;
 
-        $lists = Attachment::query()->where(function($query) use ($cat_id,$user_id){
+        $lists = Attachment::query()->where(function($query) use ($cat_id, $user_id){
             return $query->when($cat_id!=0, function($query) use ($cat_id){
                 return $query->where('cat_id',$cat_id);
             })->where('user_id',$user_id);

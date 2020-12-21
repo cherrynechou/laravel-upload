@@ -45,9 +45,9 @@ class UploadController extends BaseController
      */
     public function postUpload(Request $request)
     {
-        $category = request('category') ? request('category') : 'images' ;
+        $category = request('category') ? request('category') : 'image' ;
 
-        $module = request('module') ? request('module') ? '';
+        $module = request('module') ? request('module') : '';
 
         $user_id = request('user_id') ?? 0;
 
@@ -107,7 +107,7 @@ class UploadController extends BaseController
             $data[$key]['path'] = $file_path;
             $data[$key]['user_id'] = $user_id;
             $data[$key]['file_ext'] = $extension;
-            $data[$key]['md5'] = md5($file_path);
+            $data[$key]['md5'] = md5_file($file_path);
             $data[$key]['url'] = $this->objectUrl($file_path);
         }
 
