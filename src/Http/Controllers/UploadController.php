@@ -90,7 +90,7 @@ class UploadController extends BaseController
             $extension = $item->getClientOriginalExtension();
 
             # 临时绝对路径
-            $realPath = $item->path();
+            $realPath = $item->getRealPath();
 
             $fileName = generate_random_string() . '.' . $extension;
 
@@ -107,7 +107,7 @@ class UploadController extends BaseController
             $data[$key]['path'] = $file_path;
             $data[$key]['user_id'] = $user_id;
             $data[$key]['file_ext'] = $extension;
-            $data[$key]['md5'] = md5_file($file_path);
+            $data[$key]['md5'] = md5_file($realPath);
             $data[$key]['url'] = $this->objectUrl($file_path);
         }
 
