@@ -99,7 +99,7 @@ class UploadController extends BaseController
             //文件全路径名
             $file_path = $target_directory . $fileName;
 
-            //判断文件是否存在
+            //判断文件是否存在 
             $this->storage->putFileAs($target_directory, new File($realPath), $fileName);
 
             //把扩展名去掉
