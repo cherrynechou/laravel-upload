@@ -26,6 +26,7 @@ class CreateAttachmentTable extends Migration
 
                 $table->integer('cat_id')->default(0)->comment('文件分组'); //分类ID
                 $table->integer('user_id')->nullable()->default(0)->comment('用户id'); //分类ID
+                $table->string('module_name',100)->comment('模块名称');
                 $table->string('file_name',255)->comment('文件名称');
                 $table->string('md5',32)->comment('图片md5');
                 $table->string('url',255)->comment('本地url');    //本地url

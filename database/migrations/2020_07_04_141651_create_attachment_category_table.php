@@ -23,7 +23,7 @@ class CreateAttachmentCategoryTable extends Migration
                 $table->bigIncrements('id');
 
                 $table->integer('parent_id')->nullable()->default(0);
-                $table->integer('user_id')->nullable()->default(0)->comment('用户id'); //分类ID
+                $table->string('module_name',100)->comment('模块名称');
                 $table->string('name'); //分类的名字
                 $table->string('label'); //分类的名字
 

@@ -9,7 +9,6 @@ namespace CherryneChou\LaravelUpload\Http\Controllers;
 
 use CherryneChou\LaravelUpload\Models\Attachment;
 use CherryneChou\LaravelUpload\Models\AttachmentCategory;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -20,19 +19,22 @@ use Illuminate\Support\Facades\Storage;
 class UtilsController extends BaseController
 {
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getResources(Request $request)
     {
-        $cat_id = $request->input('cat_id') ?? 0;
+        $cat_id = request('cat_id') ?? 0;
 
         $user_id = request('user_id') ?? 0;
 
-        $lists = Attachment::query()->where(function($query) use ($cat_id, $user_id){
-            return $query->when($cat_id!=0, function($query) use ($cat_id){
-                return $query->where('cat_id',$cat_id);
-            })->where('user_id',$user_id);
+        $app_name = request('app_name') ?? '';
+
+        $lists = Attachment::query()->when($cat_id,function($query) use ($cat_id){
+          return $query->where('cat_id',$cat_id);
+        })->when($user_id,function($query) use ($user_id){
+            return $query->where('user_id',$user_id);
+        })->when($app_name,function($query) use ($app_name){
+            return $query->where('app_name',$app_name);
         })->orderBy('created_at','DESC')->paginate(10);
 
         //处理数据
@@ -60,11 +62,10 @@ class UtilsController extends BaseController
     {
         try {
 
-            $user_id = request('user_id') ?? 0;
+            $app_name = request('app_name') ?? '';
 
-
-            $categories = AttachmentCategory::query()->where(function($query) use ($user_id){
-                return $query->where('user_id',$user_id);
+            $categories = AttachmentCategory::query()->where(function($query) use ($app_name){
+                return $query->where('app_name',$app_name);
             })->get();
 
             return $this->ajaxJson(true,$categories,'200');

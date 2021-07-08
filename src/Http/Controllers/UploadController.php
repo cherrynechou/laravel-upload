@@ -45,32 +45,44 @@ class UploadController extends BaseController
      */
     public function postUpload(Request $request)
     {
-        $category = request('category') ? request('category') : 'image' ;
 
-        $module = request('module') ? request('module') : '';
+        //模块
+        $app_name = request('app_name') ? request('app_name') : '';
+
+        //模块
+        $module = request('module') ? request('module') : 'image';
+
+        //子目录
+        $directory = request('directory')? request('directory') : '' ;
 
         $user_id = request('user_id') ?? 0;
 
-        $where = ['name'=>$category, 'user_id'=>$user_id];
+        $where = ['name'=>$category, 'app_name'=>$app_name];
 
         $categoryData  =  $where + ['label' => $category, 'description'=>''];
+
         //分类
         $now_category = AttachmentCategory::firstOrCreate($where, $categoryData);
 
         $files = $request->file('upload_image');
 
-        //设定目录
-        if(!empty($user_id)){
-            $category = $category .'/' . $user_id;
-        }
+        $uploadDirectory = '';
 
         if(!empty($module)){
-            $category = $category .'/' . $module;
+            $uploadDirectory .= $module . '/'  ;
         }
 
+        //设定目录
+        if(!empty($user_id)){
+            $uploadDirectory .= $user_id . '/' ;
+        }
+
+        if(!empty($directory)){
+              $uploadDirectory .= $directory . '/' ;
+        }
 
         //文件目录模块
-        $this->uploadDirectory = $category;
+        $this->uploadDirectory = $uploadDirectory;
 
         //生成保存数据
         $data = [];
@@ -99,10 +111,11 @@ class UploadController extends BaseController
             //文件全路径名
             $file_path = $target_directory . $fileName;
 
-            //判断文件是否存在 
+            //判断文件是否存在
             $this->storage->putFileAs($target_directory, new File($realPath), $fileName);
 
             //把扩展名去掉
+            $data[$key]['app_name'] = $module;
             $data[$key]['name'] = $fileName;
             $data[$key]['path'] = $file_path;
             $data[$key]['user_id'] = $user_id;
