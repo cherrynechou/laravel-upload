@@ -21,7 +21,7 @@ class UtilsController extends BaseController
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getResources(Request $request)
+    public function getResources()
     {
         $cat_id = request('cat_id') ?? 0;
 

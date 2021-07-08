@@ -49,11 +49,11 @@ class UploadController extends BaseController
         //模块
         $app_name = request('app_name') ? request('app_name') : '';
 
-        //模块
-        $module = request('module') ? request('module') : 'image';
+        //分类
+        $category = request('category') ? request('category') : 'image' ;
 
-        //子目录
-        $directory = request('directory')? request('directory') : '' ;
+        //模块
+        $module = request('module') ? request('module') : '';
 
         $user_id = request('user_id') ?? 0;
 
@@ -66,23 +66,18 @@ class UploadController extends BaseController
 
         $files = $request->file('upload_image');
 
-        $uploadDirectory = '';
-
-        if(!empty($module)){
-            $uploadDirectory .= $module . '/'  ;
-        }
 
         //设定目录
         if(!empty($user_id)){
-            $uploadDirectory .= $user_id . '/' ;
+             $category .= '/' .  $user_id  ;
         }
 
-        if(!empty($directory)){
-              $uploadDirectory .= $directory . '/' ;
+        if(!empty($module)){
+            $category .= '/' . $module  ;
         }
 
         //文件目录模块
-        $this->uploadDirectory = $uploadDirectory;
+        $this->uploadDirectory =  $category;
 
         //生成保存数据
         $data = [];
@@ -151,7 +146,7 @@ class UploadController extends BaseController
      */
     public function destroy(Request $request)
     {
-        $id = $request->input('id');
+        $id = request('id');
 
         try{
             $attachment = Attachment::findOrFail($id);
