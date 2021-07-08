@@ -19,7 +19,9 @@
 @if($lists->hasPages())
     <div class="material-list-paper">
         @if(!empty($cat_id))
-            {{ $lists->appends(['cat_id'=>$cat_id])->links() }}
+            {{ $lists->appends(['cat_id'=>$cat_id,'app_name'=>$app_name])->links() }}
+        @elseif(empty($cat_id))
+            {{ $lists->appends(['app_name'=>$app_name])->links() }}
         @else
             {{ $lists->links() }}
         @endif

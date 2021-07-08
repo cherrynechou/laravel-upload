@@ -52,7 +52,7 @@ class UtilsController extends BaseController
             return $item;
         });
 
-        return view('laravel-upload::resource',compact('lists','cat_id'));
+        return view('laravel-upload::resource',compact('lists', 'cat_id', 'app_name'));
     }
 
     /**
