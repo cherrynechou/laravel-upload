@@ -47,17 +47,17 @@ class UploadController extends BaseController
     {
 
         //模块
-        $app_name = request('app_name') ? request('app_name') : '';
+        $module = request('module') ? request('module') : '';
 
         //分类
         $category = request('category') ? request('category') : 'image' ;
 
-        //模块
-        $module = request('module') ? request('module') : '';
+        //目录
+        $directory = request('directory') ? request('directory') : '' ;
 
         $user_id = request('user_id') ?? 0;
 
-        $where = ['name'=>$category, 'app_name'=>$app_name];
+        $where = ['name'=>$category, 'module_name' => $module];
 
         $categoryData  =  $where + ['label' => $category, 'description'=>''];
 
@@ -72,8 +72,8 @@ class UploadController extends BaseController
              $category .= '/' .  $user_id  ;
         }
 
-        if(!empty($module)){
-            $category .= '/' . $module  ;
+        if(!empty($directory)){
+            $category .= '/' . $directory  ;
         }
 
         //文件目录模块
@@ -110,7 +110,7 @@ class UploadController extends BaseController
             $this->storage->putFileAs($target_directory, new File($realPath), $fileName);
 
             //把扩展名去掉
-            $data[$key]['app_name'] = $module;
+            $data[$key]['module_name'] = $module;
             $data[$key]['name'] = $fileName;
             $data[$key]['path'] = $file_path;
             $data[$key]['user_id'] = $user_id;

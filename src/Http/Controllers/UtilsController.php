@@ -23,18 +23,18 @@ class UtilsController extends BaseController
      */
     public function getResources()
     {
-        $cat_id = request('cat_id') ?? 0;
+        $cat_id = request('cat_id') ?? 0;  //分类
 
-        $user_id = request('user_id') ?? 0;
+        $user_id = request('user_id') ?? 0;  //用户或者 商家
 
-        $app_name = request('app_name') ?? '';
+        $module_name = request('module_name') ?? '';
 
         $lists = Attachment::query()->when($cat_id,function($query) use ($cat_id){
           return $query->where('cat_id',$cat_id);
         })->when($user_id,function($query) use ($user_id){
             return $query->where('user_id',$user_id);
-        })->when($app_name,function($query) use ($app_name){
-            return $query->where('app_name',$app_name);
+        })->when($app_name,function($query) use ($module_name){
+            return $query->where('module_name',$module_name);
         })->orderBy('created_at','DESC')->paginate(10);
 
         //处理数据
@@ -52,7 +52,7 @@ class UtilsController extends BaseController
             return $item;
         });
 
-        return view('laravel-upload::resource',compact('lists', 'cat_id', 'app_name'));
+        return view('laravel-upload::resource',compact('lists', 'cat_id', 'module_name'));
     }
 
     /**
