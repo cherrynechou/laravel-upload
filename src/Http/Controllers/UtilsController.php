@@ -33,7 +33,7 @@ class UtilsController extends BaseController
           return $query->where('cat_id',$cat_id);
         })->when($user_id,function($query) use ($user_id){
             return $query->where('user_id',$user_id);
-        })->when($app_name,function($query) use ($module_name){
+        })->when($module_name,function($query) use ($module_name){
             return $query->where('module_name',$module_name);
         })->orderBy('created_at','DESC')->paginate(10);
 
@@ -62,10 +62,10 @@ class UtilsController extends BaseController
     {
         try {
 
-            $app_name = request('app_name') ?? '';
+            $module_name = request('module_name') ?? '';
 
-            $categories = AttachmentCategory::query()->where(function($query) use ($app_name){
-                return $query->where('app_name',$app_name);
+            $categories = AttachmentCategory::query()->where(function($query) use ($module_name){
+                return $query->where('module_name',$module_name);
             })->get();
 
             return $this->ajaxJson(true,$categories,'200');

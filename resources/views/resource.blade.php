@@ -21,7 +21,7 @@
         @if(!empty($cat_id))
             {{ $lists->appends(['cat_id'=>$cat_id,'module_name'=>$module_name])->links() }}
         @elseif(empty($cat_id))
-            {{ $lists->appends(['app_name'=>$app_name])->links() }}
+            {{ $lists->appends(['module_name'=>$module_name])->links() }}
         @else
             {{ $lists->links() }}
         @endif

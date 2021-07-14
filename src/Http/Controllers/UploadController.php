@@ -45,9 +45,8 @@ class UploadController extends BaseController
      */
     public function postUpload(Request $request)
     {
-
         //模块
-        $module = request('module') ? request('module') : '';
+        $module_name = request('module_name') ? request('module_name') : '';
 
         //分类
         $category = request('category') ? request('category') : 'image' ;
@@ -57,7 +56,7 @@ class UploadController extends BaseController
 
         $user_id = request('user_id') ?? 0;
 
-        $where = ['name'=>$category, 'module_name' => $module];
+        $where = ['name'=>$category, 'module_name' => $module_name];
 
         $categoryData  =  $where + ['label' => $category, 'description'=>''];
 
