@@ -109,7 +109,7 @@ class UploadController extends BaseController
             $this->storage->putFileAs($target_directory, new File($realPath), $fileName);
 
             //把扩展名去掉
-            $data[$key]['module_name'] = $module;
+            $data[$key]['module_name'] = $module_name;
             $data[$key]['name'] = $fileName;
             $data[$key]['path'] = $file_path;
             $data[$key]['user_id'] = $user_id;

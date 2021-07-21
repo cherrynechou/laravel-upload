@@ -44,12 +44,13 @@ class ImageUploadedStore
 
             foreach ($imgData as $key=>$item){
                 Attachment::create([
-                    'file_name'     => $item['name'],                    //文件名称
-                    'url'           => $item['path'],                    //本地路径
-                    'md5'           => $item['md5'],
-                    'user_id'       => $item['user_id'],
-                    'file_ext'      => $item['file_ext'],
-                    'cat_id'        => $category_id              //分类id
+                    'file_name'       =>  $item['name'],                    //文件名称
+                    'module_name'     =>  $item['module_name'],                    //文件名称
+                    'url'             =>  $item['path'],                    //本地路径
+                    'md5'             =>  $item['md5'],
+                    'user_id'         =>  $item['user_id'],
+                    'file_ext'        =>  $item['file_ext'],
+                    'cat_id'          =>  $category_id              //分类id
                 ]);
             }
         }
