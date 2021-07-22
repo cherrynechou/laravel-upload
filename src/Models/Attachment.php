@@ -22,7 +22,7 @@ class Attachment extends Model
      * @var array
      */
     protected $fillable = [
-        'cat_id', 'user_id', 'file_name', 'md5' , 'url', 'file_ext' , 'type'
+        'cat_id', 'module_name', 'user_id', 'file_name', 'md5' , 'url', 'file_ext' , 'type'
     ];
 
     public function __construct(array $attributes = [])
