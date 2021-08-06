@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class UtilsController extends BaseController
 {
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -29,11 +30,11 @@ class UtilsController extends BaseController
 
         $module_name = request('module_name') ?? '';
 
-        $lists = Attachment::query()->when($cat_id,function($query) use ($cat_id){
-          return $query->where('cat_id',$cat_id);
+        $lists = Attachment::query()->when($cat_id, function($query) use ($cat_id){
+          return $query->where('cat_id', $cat_id);
         })->when($user_id,function($query) use ($user_id){
-            return $query->where('user_id',$user_id);
-        })->when($module_name,function($query) use ($module_name){
+            return $query->where('user_id', $user_id);
+        })->when($module_name, function($query) use ($module_name){
             return $query->where('module_name',$module_name);
         })->orderBy('created_at','DESC')->paginate(10);
 
